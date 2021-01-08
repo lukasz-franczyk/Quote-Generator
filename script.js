@@ -27,13 +27,13 @@ async function getQuote() {
         const response = await fetch(proxyUrl + apiUrl);
         const data = await response.json();
         // If Author is blank, add 'Unknown'
-        if (data.authorText === '') {
+        if (data.author === '') {
             authorText.innerText = 'Unknown';
         } else {
-            authorText.innerText = data.authorText;
+            authorText.innerText = data.author;
         }
         // Reduce font size for long quotes
-        if (data.quoteText.lenght > 120) {
+        if (data.quoteText.length > 120) {
             quoteText.classList.add('long-quote')
         } else {
             quoteText.classList.remove('long-quote');
@@ -51,7 +51,7 @@ async function getQuote() {
 function tweetQuote() {
     const quote = quoteText.innerText;
     const author = authorText.innerText;
-    const twitterUrl = 'https://twitter.com/intent/tweet?text=${quote} - {author}';
+    const twitterUrl = 'https://twitter.com/intent/tweet?text=${ quoteText.innerText } - ${authorText.innerText}';
     window.open(twitterUrl, '_blank');
 }
 
